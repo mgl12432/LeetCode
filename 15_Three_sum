@@ -1,0 +1,40 @@
+
+def threeSum(val):
+
+    result = []
+
+    val.sort()  # O(n logn)
+
+    for i in range(len(val) - 2):  # O(n)
+
+        if i != 0 and val[i - 1] == val[i]: continue
+
+        p1, p2 = i + 1, len(val) - 1
+
+        while p1 < p2:  # O(n)
+            total = val[i] + val[p1] + val[p2]
+
+            if total == 0:
+                result.append([val[i], val[p1], val[p2]])
+                p1 += 1
+                p2 -= 1
+
+                while p1 < p2 and val[p1 - 1] == val[p1]:
+                    p1 += 1
+                while p1 < p2 and p2 != len(val) - 1 and val[p2 + 1] == val[p2]:
+                    p2 -= 1
+
+            elif total < 0:
+                p1 += 1
+
+            else:
+                p2 -= 1
+
+    return result
+
+result  = threeSum([-1,0,1,2,-1,-4]) # [[-1,-1,2],[-1,0,1]]
+
+print(result)
+
+# O(n^2) Time   O(n logn) + O(n) * O(n)
+# O(n) Space
