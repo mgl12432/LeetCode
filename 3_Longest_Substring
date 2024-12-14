@@ -1,0 +1,32 @@
+
+def longestSequence(val):
+
+    p1, p2 = 0, 0
+    n = len(val)
+    count = 0
+    setBank = set()
+
+    while p1 < n and p2 < n:
+
+        if val[p1] not in setBank:
+            setBank.add(val[p1])
+            p2+=1
+            count = max(count, p2-p1)
+
+        elif val[p2] not in setBank:
+            setBank.add(val[p2])
+            p2+=1
+            count = max(count, p2-p1)
+
+        elif val[p2] in setBank:
+            setBank.remove(val[p1])
+            p1+=1
+
+    return count
+
+result  = longestSequence("pwwkew") # 3
+
+print(result)
+
+# O(n) Time
+# O(n) Space
